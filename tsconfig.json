@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -15,10 +15,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {
+      "react": ["./node_modules/@types/react"]
+    },
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src", "train.ts"],
-  "paths": {
-    "react": ["./node_modules/@types/react"]
-  }
+  "include": ["src"]
 }
