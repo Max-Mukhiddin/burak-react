@@ -4,7 +4,7 @@ import Basket from "./Basket";
 import React, { useEffect, useState } from "react";
 
 export default function HomeNavbar() {
-  const authMember = null;
+  const authMember = true;
 
   const [count, setCount] = useState<number>(0);
   const [value, setvalue] = useState<boolean>(true);

@@ -16,7 +16,7 @@ import Test from "./screens/Test";
 
 function App() {
   const location = useLocation();
-  console.log("location:", location);
+
   return (
     <>
       {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
