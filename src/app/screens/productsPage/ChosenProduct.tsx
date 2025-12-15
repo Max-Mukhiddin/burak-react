@@ -21,6 +21,7 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 import { serverApi } from "../../../lib/config";
+import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -37,16 +38,21 @@ const restaurantRetriever = createSelector(
   (restaurant) => ({ restaurant })
 );
 
-export default function ChosenProduct() {
+interface ChosenProDuctProps {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function ChosenProduct(props: ChosenProDuctProps) {
+  const { onAdd } = props;
   const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
-  const { productId } = useParams<{ productId: string }>();
+  const { productsId } = useParams<{ productsId: string }>();
   const { chosenProduct } = useSelector(chosenProductRetriever);
   const { restaurant } = useSelector(restaurantRetriever);
 
   useEffect(() => {
     const product = new ProductService();
     product
-      .getProduct(productId)
+      .getProduct(productsId)
       .then((data) => setChosenProduct(data))
       .catch((err) => console.log(err));
 
@@ -107,7 +113,21 @@ export default function ChosenProduct() {
               <span>{chosenProduct.productPrice}</span>
             </div>
             <div className={"button-box"}>
-              <Button variant="contained">Add To Basket</Button>
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  onAdd({
+                    _id: chosenProduct._id,
+                    quantity: 1,
+                    name: chosenProduct.productName,
+                    price: chosenProduct.productPrice,
+                    image: chosenProduct.productImages[0],
+                  });
+                  e.stopPropagation();
+                }}
+              >
+                Add To Basket
+              </Button>
             </div>
           </Box>
         </Stack>

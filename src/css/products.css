@@ -5,6 +5,8 @@
   background: #f8f8ff;
 }
 
+/** <======= Products =======> */
+
 .products .title-container {
   margin-left: 450px;
   display: flex;
@@ -29,7 +31,7 @@
   text-align: left;
 }
 
-.products .products-search-box {
+/* .products .products-search-box {
   width: 360px;
   height: 28.54px;
   box-sizing: border-box;
@@ -42,7 +44,6 @@
 
 .products .products-search-box::placeholder {
   width: 78px;
-  /* height: 10.38px; */
   padding-left: 15px;
   display: flex;
   flex-direction: row;
@@ -54,6 +55,52 @@
   line-height: 19px;
   letter-spacing: 0%;
   text-align: left;
+}
+
+.products .search-container .search-button {
+  margin-left: -90px;
+  width: 106px;
+  height: 32px;
+  border-radius: 18.5px;
+} */
+
+.products .products-search-box {
+  width: 360px;
+  height: 28.54px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 18.5px;
+  box-shadow: 0px 4px 4px 0px rgba(213, 213, 213, 0.25);
+  background: rgba(255, 252, 252, 1);
+  outline: none;
+  padding-right: 120px; /* Space for both buttons */
+}
+
+.products .products-search-box::placeholder {
+  width: 78px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgba(74, 74, 74, 1);
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.products .search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.products .search-container .clear-icon-button {
+  position: absolute;
+  right: 100px;
+  color: rgba(74, 74, 74, 0.6);
 }
 
 .products .search-container .search-button {
@@ -98,7 +145,6 @@
 .products-grid {
   flex: 1;
 }
-
 
 .cards-frame {
   display: grid;
@@ -185,8 +231,8 @@
 }
 
 .no-data {
-    min-width: 1250px;
-    min-height: 400px;
+  min-width: 1250px;
+  min-height: 400px;
   width: 100%;
   height: 350px;
   display: flex;
@@ -359,7 +405,6 @@
     inset 0px 4px 16px 0px rgba(242, 189, 87, 0.04);
   align-items: center;
 }
-
 
 /* Address */
 .products .address {
