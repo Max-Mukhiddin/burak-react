@@ -23,7 +23,7 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  const {authMember} = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
   const history = useHistory();
   const itemsPrice = cartItems.reduce(
     (a: number, c: CartItem) => a + c.quantity * c.price,
@@ -44,27 +44,22 @@ export default function Basket(props: BasketProps) {
   };
 
   const proceedOrderHandler = async () => {
-try {
-  handleClose();
-  if(!authMember) throw new Error(Messages.error2);
+    try {
+      handleClose();
+      if (!authMember) throw new Error(Messages.error2);
 
-const order = new OrderService();
-await order.createOrder(cartItems);
+      const order = new OrderService();
+      await order.createOrder(cartItems);
 
-onDeleteAll();
+      onDeleteAll();
 
-history.push("/orders");
-
-// REFRESH VIA CONTEXT 
-
-
-
-} catch(err) {
-  console.log(err);
-  sweetErrorHandling(err).then()
-
-}
-} 
+      setOrderBuilder(new Date());
+      history.push("/orders");
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
   return (
     <Box className={"hover-line"}>
@@ -168,8 +163,14 @@ history.push("/orders");
           </Box>
           {cartItems.length !== 0 ? (
             <Box className={"basket-order"}>
-              <span className={"price"}>Total: {totalPrice.toFixed(1)} ({itemsPrice} + {shippingCost})</span>
-              <Button onClick={proceedOrderHandler} startIcon={<ShoppingCartIcon />} variant={"contained"}>
+              <span className={"price"}>
+                Total: {totalPrice.toFixed(1)} ({itemsPrice} + {shippingCost})
+              </span>
+              <Button
+                onClick={proceedOrderHandler}
+                startIcon={<ShoppingCartIcon />}
+                variant={"contained"}
+              >
                 Order
               </Button>
             </Box>
