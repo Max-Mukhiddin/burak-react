@@ -66,29 +66,24 @@ export default function Products(props: ProDuctsProps) {
 
   useEffect(() => {
     if (searchText === "") {
-      productSearch.search = "";
-      setProductSearch({ ...productSearch });
+      setProductSearch((prev) => ({
+        ...prev,
+        page: 1, // FIXED: Reset to page 1 when clearing search
+        search: "",
+      }));
     }
   }, [searchText]);
 
   /** HANDLERS **/
   const searchCollectionHandler = (collection: ProductCollection) => {
-    productSearch.page = 1;
-    productSearch.productCollection = collection;
-    setProductSearch({ ...productSearch });
-
-    //   setProductSeach(prev => ({
-    //   ...prev,
-    //   page: 1,
-    //   productCollection: collection,
-    // }));
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1, // FIXED: Reset to page 1
+      productCollection: collection,
+    }));
   };
 
   const searchOrderHandler = (order: string) => {
-    // productSearch.page = 1;
-    // productSearch.order = order;
-    // setProductSearch({ ...productSearch });
-
     setProductSearch((prev) => ({
       ...prev,
       page: 1,
@@ -97,8 +92,11 @@ export default function Products(props: ProDuctsProps) {
   };
 
   const searchProductHandler = () => {
-    productSearch.search = searchText;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1, // FIXED: Reset to page 1 when searching
+      search: searchText,
+    }));
   };
 
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
@@ -115,23 +113,6 @@ export default function Products(props: ProDuctsProps) {
       <Container>
         <Stack className="title-container">
           <Typography className="products-title">Burak Restaurant</Typography>
-          {/* <Box className="search-container">
-            <input
-              type="text"
-              placeholder="Type here"
-              className="products-search-box"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              className="search-button"
-              onClick={searchProductHandler}
-            >
-              SEARCH <SearchIcon />
-            </Button>
-          </Box> */}
           <Box className="search-container">
             <input
               type="text"
@@ -388,7 +369,7 @@ export default function Products(props: ProDuctsProps) {
             <Box className={"address-title"}>Our address</Box>
             <iframe
               style={{ marginTop: "60px", marginBottom: "89px", border: 0 }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d203686.4830396607!2d126.8348966!3d37.5666791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca28b61c565cd%3A0x858aedb4e4ea83eb!2sSeoul%2C%20South%20Korea!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317114.8242487396!2d126.6709445!3d37.7598683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98f3f0f4b6df%3A0x6b4c9b6b9d3e1c3!2sPaju-si%2C%20Gyeonggi-do%2C%20South%20Korea!5e0!3m2!1sen!2s!4v1700000000001!5m2!1sen!2s"
               width="1320"
               height="560"
               allowFullScreen

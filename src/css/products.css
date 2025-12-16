@@ -277,7 +277,7 @@
 .shop-button {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 80%; /* Changed from 50% to move it down */
   transform: translate(-50%, -50%);
   box-sizing: border-box;
   border: 1px solid rgba(227, 192, 141, 1);
